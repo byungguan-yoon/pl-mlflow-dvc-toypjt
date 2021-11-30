@@ -22,7 +22,7 @@ def cli_main():
     print_auto_logged_info(mlflow.get_run(run_id=run.info.run_id))
 
     for key, data in fetch_logged_data(run.info.run_id).items():
-        print("\n---------- logged {} ----------".format(key))
+        print("\n--------- logged {} ---------".format(key))
         pprint(data)
 
 
