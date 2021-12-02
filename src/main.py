@@ -5,11 +5,12 @@ from pprint import pprint
 from data import MNISTDataModule
 from model import LightningMNISTClassifier
 from utils import print_auto_logged_info, fetch_logged_data
+from mnist_classifier import MnistClassifier
 
 
 model_path = '../data/model/'
 
-def cli_main():
+def train_model(packaging=False):
     mnistdatamodule = MNISTDataModule()
     model = LightningMNISTClassifier(lr_rate=1e-3)
 
@@ -25,6 +26,10 @@ def cli_main():
         print("\n--------- logged {} ---------".format(key))
         pprint(data)
 
+    if packaging:
+        bento_svc = MnistClassifier()
+        bento_svc.pack('classifier', model)
+        bento_svc.save()
 
 if __name__ == '__main__':
-    cli_main()
+    train_model(packaging=True)
